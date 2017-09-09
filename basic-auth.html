@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Login Example</title>
+        <link rel="stylesheet" href="assets/css/style.css">
+
+        <style>
+            html,
+            body {
+                height: 100%;
+                width: 100%;
+                margin: 0;
+                padding: 0;
+            }
+
+            .wrapper {
+                height: 100vh;
+                width: 8.33% * 10;
+                margin-left: 8.33%;
+                position: relative;
+            }
+
+
+            input {
+                padding: 10px;
+                width: 80%;
+            }
+
+            input[type='button'] {
+                display: inline-block;
+                width: 80px;
+                height: 40px;
+                border-radius: 0;
+                background: black;
+                color: white;
+                font-size: 15px;
+                border: none;
+                float: left;
+            }
+
+            .form-group {
+                margin: 10px 0px;
+            }
+        </style>
+    </head>
+
+    <body>
+
+        <div class="wrapper">
+
+            <div class="login">
+                <form action="" method="post">
+
+                    <div class="form-group">
+                        <input type="email" placeholder="enter your email here" id="email">
+                    </div>
+
+                    <div class="form-group">
+                        <input type="password" placeholder="xxxxxxxxxx" id="password">
+                    </div>
+
+                    <div class="form-group">
+                        <input type="button" name="login" value="login" id="login">
+                    </div>
+
+                    <div class="form-group">
+                        <input type="button" name="logup" value="logup" id="logup">
+                    </div>
+
+                    <div class="form-group">
+                        <input type="button" name="logout" value="logout" id="logout">
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <script src="https://www.gstatic.com/firebasejs/4.3.1/firebase.js"></script>
+        <script>
+            // Initialize Firebase
+            var config = {
+                apiKey: "AIzaSyCicaHNZkHnc6Ied3WNMjHuy0sobU6bDwQ",
+                authDomain: "dean-test-ground.firebaseapp.com",
+                databaseURL: "https://dean-test-ground.firebaseio.com",
+                projectId: "dean-test-ground",
+                storageBucket: "",
+                messagingSenderId: "281712105205"
+            };
+            firebase.initializeApp(config);
+
+
+            const email =document.getElementById("email");
+            const pass = document.getElementById("password");
+            const login = document.getElementById("login");
+            const logup = document.getElementById("logup");
+            const logout = document.getElementById("logout");
+
+
+
+                const auth = firebase.auth();
+
+            // - sign in event
+            login.addEventListener("click", e =>{
+
+                eValue = email.value;
+                pValue = pass.value;
+
+                const promise = auth.signInWithEmailAndPassword(eValue, pValue);
+                promise.catch((err)=>{console.log(err.message )});
+
+            });
+
+            // - sign up event
+            logup.addEventListener("click", e =>{
+
+                eValue = email.value;
+                pValue = pass.value;
+
+                const promise = auth.createUserWithEmailAndPassword(eValue, pValue);
+                promise.catch((err)=>{console.log(err.message )})
+            });
+
+            // - realtime listener
+            auth.onAuthStateChanged(firebaseUser => {
+
+            })
+
+
+
+        </script>
+
+        <script>
+        </script>
+    </body>
+
+</html>
